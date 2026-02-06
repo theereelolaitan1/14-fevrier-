@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Demande Valentine</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background: #ffe6f0;
+        }
+        h1 {
+            margin-top: 50px;
+            color: #d63384;
+        }
+        #buttons {
+            margin-top: 40px;
+        }
+        button {
+            font-size: 20px;
+            padding: 15px 30px;
+            margin: 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        #oui {
+            background-color: #ff4da6;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        #non {
+            background-color: #999;
+            color: white;
+        }
+        #chat {
+            display: none;
+            margin-top: 40px;
+        }
+        #chat img {
+            width: 250px;
+            animation: dance 1s infinite alternate;
+        }
+@keyframes dance {
+            from {
+                transform: rotate(-10deg);
+            }
+            to {
+                transform: rotate(10deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Tracya Princesse, veux-tu être ma Valentine ? ❤️</h1>
+    <div id="buttons">
+        <button id="oui">Oui</button>
+        <button id="non">Non</button>
+    </div>
+    <div id="chat">
+        <h2>🎉 Youpiii ! 🎉</h2>
+        <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" alt="Chat qui danse">
+    </div>
+
+    <script>
+        let nonClicks = 0;
+        const ouiBtn = document.getElementById("oui");
+        const nonBtn = document.getElementById("non");
+        const chatDiv = document.getElementById("chat");
+
+        nonBtn.addEventListener("click", () => {
+            nonClicks++;
+            let currentSize = parseInt(window.getComputedStyle(ouiBtn).fontSize);
+            ouiBtn.style.fontSize = (currentSize + 10) + "px";
+
+            if (nonClicks >= 4) {
+                nonBtn.style.display = "none";
+            }
+        });
+
+        ouiBtn.addEventListener("click", () => {
+            // Confettis 🎉
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement("div");
+                confetti.textContent = "✨";
+                confetti.style.position = "fixed";
+                confetti.style.left = Math.random() * window.innerWidth + "px";
+                confetti.style.top = Math.random() * window.innerHeight + "px";
+                confetti.style.fontSize = (Math.random() * 20 + 10) + "px";
+                confetti.style.animation = "fall 2s linear forwards";
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 2000);
+            }
+
+            // Affiche le chat qui danse
+            chatDiv.style.display = "block";
+        });
+    </script>
+</body>
+</html>
